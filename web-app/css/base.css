@@ -290,10 +290,11 @@ abbr {
     border-right: 1px solid #DDD;
     border-left: 1px solid #DDD;
     padding: 15px;
+    background-color: white;
 }
 
 #content .nav-tabs li:not(.active)  a {
-    background-color: #f0f0e8;
+    /*background-color: #f0f0e8;*/
     border: 1px solid #ddd;
     margin-right: 4px;
 }

@@ -254,8 +254,20 @@ h2#headingSciName {
     width: 35%;
 }
 
+#advancedSearchForm input.bscombobox {
+    width: 100%;
+}
+
 #advancedSearchForm input.occurrence_date {
     width: 15%;
+}
+
+#advancedSearchForm .dropdown-menu>.active>a:focus, #advancedSearchForm .dropdown-menu>.active>a:hover {
+    background-color: #e2e2e2;
+}
+
+#advancedSearchForm .bscombobox {
+    width: 100%;
 }
 
 #sortWidget label {
@@ -296,14 +308,14 @@ h2#headingSciName {
 }
 
 .searchPage select, .searchPage input[type="submit"], .searchPage input[type="reset"] {
-    height: 24px;
-    line-height: 24px;
-    padding: 0px 6px;
+    /*height: 24px;*/
+    /*line-height: 24px;*/
+    /*padding: 0px 6px;*/
 }
 
 .searchPage select {
-    padding-left: 0;
-    padding-right: 0;
+    /*padding-left: 0;*/
+    /*padding-right: 0;*/
 }
 
 #outageMessage {

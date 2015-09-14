@@ -35,8 +35,8 @@
         $(document).ready(function() {
 
             var mapInit = false;
-            $('a[data-toggle="tab"]').on('shown', function(e) {
-                //console.log("this", $(this).attr('id'));
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+                console.log("this", $(this).attr('id'));
                 var id = $(this).attr('id');
                 location.hash = 'tab_'+ $(e.target).attr('href').substr(1);
 
@@ -261,107 +261,129 @@
 </head>
 
 <body>
-    <div id="headingBar" class="heading-bar">
-        <h1 style="width:100%;" id="searchHeader"><g:message code="home.index.body.title" default="Search for records in"/> ${raw(hubDisplayName)}</h1>
+<div id="headingBar" class="heading-bar">
+    <h1 style="width:100%;" id="searchHeader"><g:message code="home.index.body.title" default="Search for records in"></g:message> ${raw(hubDisplayName)}</h1>
+</div>
+<g:if test="${flash.message}">
+    <div class="message alert alert-info alert-dismissable">
+        <button type="button" class="close" onclick="$(this).parent().hide()">×</button>
+        <b><g:message code="home.index.body.alert" default="Alert:"></g:message></b> ${raw(flash.message)}
     </div>
-    <g:if test="${flash.message}">
-        <div class="message alert alert-info">
-            <button type="button" class="close" onclick="$(this).parent().hide()">×</button>
-            <b><g:message code="home.index.body.alert" default="Alert:"/></b> ${raw(flash.message)}
+</g:if>
+<div class="row" id="content">
+    <div class="col-sm-12 col-md-12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" role="tablist" id="searchTabs">
+                <li><a id="t1" href="#simpleSearch" data-toggle="tab"><g:message code="home.index.navigator01" default="Simple search"></g:message></a>
+                </li>
+                <li><a id="t2" href="#advanceSearch" data-toggle="tab"><g:message code="home.index.navigator02" default="Advanced search"></g:message></a>
+                </li>
+                <li><a id="t3" href="#taxaUpload" data-toggle="tab"><g:message code="home.index.navigator03" default="Batch taxon search"></g:message></a>
+                </li>
+                <li><a id="t4" href="#catalogUpload" data-toggle="tab"><g:message code="home.index.navigator04" default="Catalogue number search"></g:message></a>
+                </li>
+                <li><a id="t5" href="#spatialSearch" data-toggle="tab"><g:message code="home.index.navigator05" default="Spatial search"></g:message></a>
+                </li>
+            </ul>
         </div>
-    </g:if>
-    <div class="row-fluid" id="content">
-        <div class="span12">
-            <div class="tabbable">
-                <ul class="nav nav-tabs" id="searchTabs">
-                    <li><a id="t1" href="#simpleSearch" data-toggle="tab"><g:message code="home.index.navigator01" default="Simple search"/></a></li>
-                    <li><a id="t2" href="#advanceSearch" data-toggle="tab"><g:message code="home.index.navigator02" default="Advanced search"/></a></li>
-                    <li><a id="t3" href="#taxaUpload" data-toggle="tab"><g:message code="home.index.navigator03" default="Batch taxon search"/></a></li>
-                    <li><a id="t4" href="#catalogUpload" data-toggle="tab"><g:message code="home.index.navigator04" default="Catalogue number search"/></a></li>
-                    <li><a id="t5" href="#spatialSearch" data-toggle="tab"><g:message code="home.index.navigator05" default="Spatial search"/></a></li>
-                </ul>
-            </div>
-            <div class="tab-content searchPage">
-                <div id="simpleSearch" class="tab-pane active">
-                    <form name="simpleSearchForm" id="simpleSearchForm" action="${request.contextPath}/occurrences/search" method="GET">
-                        <br/>
-                        <div class="controls">
-                            <div class="input-append">
-                                <input type="text" name="taxa" id="taxa" class="input-xxlarge">
-                                <button id="locationSearch" type="submit" class="btn"><g:message code="home.index.simsplesearch.button" default="Search"/></button>
+
+        <div class="tab-content searchPage">
+            <div id="simpleSearch" class="tab-pane active">
+                <form name="simpleSearchForm" id="simpleSearchForm" action="${request.contextPath}/occurrences/search"
+                      method="GET">
+                    <div class="row">
+                        <div class="controls col-xs-12 col-sm-9 col-lg-6 ">
+                            <div class="input-group">
+                                <input type="text" name="taxa" id="taxa" class="form-control">
+                                <span class="input-group-btn">
+                                    <button id="locationSearch" type="submit" class="btn btn-default"><g:message code="home.index.simsplesearch.button" default="Search"></g:message></button>
+                                </span>
                             </div>
                         </div>
-                        <div>
-                            <br/>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-9 col-lg-6">
                             <span style="font-size: 12px; color: #444;">
-                                <b><g:message code="home.index.simsplesearch.span" default="Note: the simple search attempts to match a known species/taxon - by its scientific name or common name. If there are no name matches, a full text search will be performed on your query"/>
+                                <b><g:message code="home.index.simsplesearch.span"
+                                              default="Note: the simple search attempts to match a known species/taxon - by its scientific name or common name. If there are no name matches, a full text search will be performed on your query"></g:message></b>
                             </span>
                         </div>
-                    </form>
-                </div><!-- end simpleSearch div -->
-                <div id="advanceSearch" class="tab-pane">
-                    <g:render template="advanced" />
-                </div><!-- end #advancedSearch div -->
-                <div id="taxaUpload" class="tab-pane">
-                    <form name="taxaUploadForm" id="taxaUploadForm" action="${biocacheServiceUrl}/occurrences/batchSearch" method="POST">
-                        <p><g:message code="home.index.taxaupload.des01" default="Enter a list of taxon names/scientific names, one name per line (common names not currently supported)."/></p>
-                        <%--<p><input type="hidden" name="MAX_FILE_SIZE" value="2048" /><input type="file" /></p>--%>
-                        <p><textarea name="queries" id="raw_names" class="span6" rows="15" cols="60"></textarea></p>
-                        <p>
-                            <%--<input type="submit" name="action" value="Download" />--%>
-                            <%--&nbsp;OR&nbsp;--%>
-                            <input type="hidden" name="redirectBase" value="${serverName}${request.contextPath}/occurrences/search"/>
-                            <input type="hidden" name="field" value="raw_name"/>
-                            <input type="submit" name="action" value=<g:message code="home.index.taxaupload.button01" default="Search"/> class="btn" /></p>
-                    </form>
-                </div><!-- end #uploadDiv div -->
-                <div id="catalogUpload" class="tab-pane">
-                    <form name="catalogUploadForm" id="catalogUploadForm" action="${biocacheServiceUrl}/occurrences/batchSearch" method="POST">
-                        <p><g:message code="home.index.catalogupload.des01" default="Enter a list of catalogue numbers (one number per line)."/></p>
-                        <%--<p><input type="hidden" name="MAX_FILE_SIZE" value="2048" /><input type="file" /></p>--%>
-                        <p><textarea name="queries" id="catalogue_numbers" class="span6" rows="15" cols="60"></textarea></p>
-                        <p>
-                            <%--<input type="submit" name="action" value="Download" />--%>
-                            <%--&nbsp;OR&nbsp;--%>
-                            <input type="hidden" name="redirectBase" value="${serverName}${request.contextPath}/occurrences/search"/>
-                            <input type="hidden" name="field" value="catalogue_number"/>
-                            <input type="submit" name="action" value=<g:message code="home.index.catalogupload.button01" default="Search"/> class="btn"/></p>
-                    </form>
-                </div><!-- end #catalogUploadDiv div -->
-                <div id="spatialSearch" class="tab-pane">
-                    <div class="row-fluid">
-                        <div class="span3">
-                            <div>
-                                <g:message code="search.map.helpText" default="Select one of the draw tools (polygon, rectangle, circle), draw a shape and click the search link that pops up."/>
-                            </div>
-                            <br>
-                            <div class="accordion accordion-caret" id="accordion2">
-                                <div class="accordion-group">
-                                    <div class="accordion-heading">
-                                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                            <g:message code="search.map.importToggle" default="Import WKT"/>
-                                        </a>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-body collapse">
-                                        <div class="accordion-inner">
-                                            <p><g:message code="search.map.importText"/></p>
-                                            <p><g:message code="search.map.wktHelpText" default="Optionally, paste a WKT string: "/></p>
-                                            <textarea type="text" id="wktInput"></textarea>
-                                            <br>
-                                            <button class="btn btn-small" id="addWkt"><g:message code="search.map.wktButtonText" default="Add to map"/></button>
-                                        </div>
+                    </div>
+                </form>
+            </div><!-- end simpleSearch div -->
+            <div id="advanceSearch" class="tab-pane">
+                <g:render template="advanced"></g:render>
+            </div><!-- end #advancedSearch div -->
+            <div id="taxaUpload" class="tab-pane">
+                <form name="taxaUploadForm" id="taxaUploadForm" action="${biocacheServiceUrl}/occurrences/batchSearch"
+                      method="POST">
+                    <p><g:message code="home.index.taxaupload.des01"
+                                  default="Enter a list of taxon names/scientific names, one name per line (common names not currently supported)."></g:message></p>
+
+                    <p><textarea name="queries" id="raw_names" class="span6" rows="15" cols="60"></textarea></p>
+
+                    <p>
+                        <input type="hidden" name="redirectBase"
+                               value="${serverName}${request.contextPath}/occurrences/search" class="form-control">
+                        <input type="hidden" name="field" value="raw_name" class="form-control"/>
+                        <input type="submit" name="action"
+                               value="<g:message code="home.index.taxaupload.button01" default="Search"
+                                                 class="form-control"/>" class="btn btn-default"/></p>
+                </form>
+            </div><!-- end #uploadDiv div -->
+            <div id="catalogUpload" class="tab-pane">
+                <form name="catalogUploadForm" id="catalogUploadForm"
+                      action="${biocacheServiceUrl}/occurrences/batchSearch" method="POST">
+                    <p><g:message code="home.index.catalogupload.des01"
+                                  default="Enter a list of catalogue numbers (one number per line)."></g:message></p>
+
+                    <p><textarea name="queries" id="catalogue_numbers" class="span6" rows="15" cols="60"></textarea></p>
+
+                    <p>
+                        <input type="hidden" name="redirectBase"
+                               value="${serverName}${request.contextPath}/occurrences/search" class="form-control">
+                        <input type="hidden" name="field" value="catalogue_number" class="form-control">
+                        <input type="submit" name="action"
+                               value="<g:message code="home.index.catalogupload.button01" default="Search"
+                                                 class="form-control"/>" class="btn btn-default"></p>
+                </form>
+            </div><!-- end #catalogUploadDiv div -->
+            <div id="spatialSearch" class="tab-pane">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3">
+                        <div>
+                            <g:message code="search.map.helpText" default="Select one of the draw tools (polygon, rectangle, circle), draw a shape and click the search link that pops up."></g:message>
+                        </div>
+                        <br>
+                        <div class="accordion accordion-caret" id="accordion2">
+                            <div class="accordion-group">
+                                <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse"
+                                       data-parent="#accordion2" href="#collapseOne">
+                                        <g:message code="search.map.importToggle" default="Import WKT"></g:message>
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="accordion-body collapse">
+                                    <div class="accordion-inner">
+                                        <p><g:message code="search.map.importText"></g:message></p>
+
+                                        <p><g:message code="search.map.wktHelpText" default="Optionally, paste a WKT string: "></g:message></p>
+                                        <textarea type="text" id="wktInput"></textarea>
+                                        <br>
+                                        <button class="btn btn-default btn-sm" id="addWkt"><g:message code="search.map.wktButtonText" default="Add to map"></g:message></button>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="span9">
-                            <div id="leafletMap" style="height:600px;"></div>
                         </div>
                     </div>
-                </div><!-- end #spatialSearch  -->
-            </div><!-- end .tab-content -->
-        </div><!-- end .span12 -->
-    </div><!-- end .row-fluid -->
+                    <div class="col-sm-9 col-md-9">
+                        <div id="leafletMap" style="height:600px;"></div>
+                    </div>
+                </div>
+            </div><!-- end #spatialSearch  -->
+        </div><!-- end .tab-content -->
+    </div><!-- end .span12 -->
+</div><!-- end .row-fluid -->
 </body>
 </html>

@@ -9,7 +9,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table01col01.title" default="ALL of these words (full text)"/></td>
             <td>
-                <input type="text" name="text" id="text" class="dataset" placeholder="" size="80" value="${params.text}"/>
+                <input type="text" name="text" id="text" class="dataset form-control" placeholder="" size="80" value="${params.text}"/>
             </td>
         </tr>
         </tbody>
@@ -23,7 +23,7 @@
             <tr style="" id="taxon_row_${i}">
                 <td class="labels"><g:message code="advancedsearch.table02col01.title" default="Species/Taxon"/></td>
                 <td>
-                    <input type="text" value="" id="taxa_${i}" name="taxonText" class="name_autocomplete" size="60">
+                    <input type="text" value="" id="taxa_${i}" name="taxonText" class="name_autocomplete form-control" size="60">
                     <input type="hidden" name="lsid" class="lsidInput" id="taxa_${i}" value=""/>
                 </td>
             </tr>
@@ -37,7 +37,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table03col01.title" default="Raw Scientific Name"/></td>
             <td>
-                <input type="text" name="raw_taxon_name" id="raw_taxon_name" class="dataset" placeholder="" size="60" value=""/>
+                <input type="text" name="raw_taxon_name" id="raw_taxon_name" class="dataset form-control" placeholder="" size="60" value=""/>
             </td>
         </tr>
         </tbody>
@@ -49,7 +49,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table04col01.title" default="Species Group"/></td>
             <td>
-                <select class="species_group" name="species_group" id="species_group">
+                <select class="species_group form-control" name="species_group" id="species_group">
                     <option value=""><g:message code="advancedsearch.table04col01.option.label" default="-- select a species group --"/></option>
                     <g:each var="group" in="${request.getAttribute("species_group")}">
                         <option value="${group.key}">${group.value}</option>
@@ -66,7 +66,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table05col01.title" default="Institution or Collection"/></td>
             <td>
-                <select class="institution_uid collection_uid" name="institution_collection" id="institution_collection">
+                <select class="institution_uid collection_uid form-control" name="institution_collection" id="institution_collection">
                     <option value=""><g:message code="advancedsearch.table05col01.option01.label" default="-- select an institution or collection --"/></option>
                     <g:each var="inst" in="${request.getAttribute("institution_uid")}">
                         <optgroup label="${inst.value}">
@@ -97,7 +97,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table06col01.title" default="Country"/></td>
             <td>
-                <select class="country" name="country" id="country">
+                <select class="country form-control" name="country" id="country">
                     <option value=""><g:message code="advancedsearch.table06col01.option.label" default="-- select a country --"/></option>
                     <g:each var="country" in="${request.getAttribute("country")}">
                         <option value="${country.key}">${country.value}</option>
@@ -108,7 +108,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table06col02.title" default="State/Territory"/></td>
             <td>
-                <select class="state" name="state" id="state">
+                <select class="state form-control" name="state" id="state">
                     <option value=""><g:message code="advancedsearch.table06col02.option.label" default="-- select a state/territory --"/></option>
                     <g:each var="state" in="${request.getAttribute("state")}">
                         <option value="${state.key}">${state.value}</option>
@@ -121,7 +121,7 @@
         <tr>
             <td class="labels"><abbr title="Interim Biogeographic Regionalisation of Australia">IBRA</abbr> <g:message code="advancedsearch.table06col03.title" default="region"/></td>
             <td>
-                <select class="biogeographic_region" name="ibra" id="ibra">
+                <select class="biogeographic_region form-control" name="ibra" id="ibra">
                     <option value=""><g:message code="advancedsearch.table06col03.option.label" default="-- select an IBRA region --"/></option>
                     <g:each var="region" in="${request.getAttribute("cl1048")}">
                         <option value="${region.key}">${region.value}</option>
@@ -134,7 +134,7 @@
         <tr>
             <td class="labels"><abbr title="Integrated Marine and Coastal Regionalisation of Australia">IMCRA</abbr> <g:message code="advancedsearch.table06col04.title" default="region"/></td>
             <td>
-                <select class="biogeographic_region" name="imcra" id="imcra">
+                <select class="biogeographic_region form-control" name="imcra" id="imcra">
                     <option value=""><g:message code="advancedsearch.table06col04.option.label" default="-- select an IMCRA region --"/></option>
                     <g:each var="region" in="${request.getAttribute("cl21")}">
                         <option value="${region.key}">${region.value}</option>
@@ -147,7 +147,7 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table06col05.title" default="Local Govt. Area"/></td>
             <td>
-                <select class="lga" name="lga" id="lga">
+                <select class="lga form-control" name="lga" id="lga">
                     <option value=""><g:message code="advancedsearch.table06col05.option.label" default="-- select local government area--"/></option>
                     <g:each var="region" in="${request.getAttribute("cl959")}">
                         <option value="${region.key}">${region.value}</option>
@@ -166,7 +166,7 @@
             <tr>
                 <td class="labels"><g:message code="advancedsearch.table07col01.title" default="Type Status"/></td>
                 <td>
-                    <select class="type_status" name="type_status" id="type_status">
+                    <select class="type_status form-control" name="type_status" id="type_status">
                         <option value=""><g:message code="advancedsearch.table07col01.option.label" default="-- select a type status --"/></option>
                         <g:each var="type" in="${request.getAttribute("type_status")}">
                             <option value="${type.key}">${type.value}</option>
@@ -185,7 +185,7 @@
             <tr>
                 <td class="labels"><g:message code="advancedsearch.table08col01.title" default="Basis of record"/></td>
                 <td>
-                    <select class="basis_of_record" name="basis_of_record" id="basis_of_record">
+                    <select class="basis_of_record form-control" name="basis_of_record" id="basis_of_record">
                         <option value=""><g:message code="advancedsearch.table08col01.option.label" default="-- select a basis of record --"/></option>
                         <g:each var="bor" in="${request.getAttribute("basis_of_record")}">
                             <option value="${bor.key}"><g:message code="${bor.value}"/></option>
@@ -197,14 +197,14 @@
         </table>
     </g:if>
     <b><g:message code="advancedsearch.title09" default="Find records with the following dataset fields"/></b>
-    <table border="0" width="100" cellspacing="2" class="compact">
+    <table border="0" width="100" cellspacing="2" class="compact form-inline">
         <thead/>
         <tbody>
         <g:if test="${request.getAttribute("data_resource_uid") && request.getAttribute("data_resource_uid").size() > 1}">
             <tr>
                 <td class="labels"><g:message code="advancedsearch.dataset.col.label" default="dataset name"/></td>
                 <td>
-                    <select class="dataset bscombobox" name="dataset" id="dataset">
+                    <select class="dataset form-control bscombobox" name="dataset" id="dataset">
                         <option value=""></option>
                         <g:each var="region" in="${request.getAttribute("data_resource_uid")}">
                             <option value="${region.key}">${region.value}</option>
@@ -216,13 +216,13 @@
         <tr>
             <td class="labels"><g:message code="advancedsearch.table09col01.title" default="Catalogue Number"/></td>
             <td>
-                <input type="text" name="catalogue_number" id="catalogue_number" class="dataset" placeholder="" value=""/>
+                <input type="text" name="catalogue_number" id="catalogue_number" class="dataset form-control" placeholder="" value=""/>
             </td>
         </tr>
         <tr>
             <td class="labels"><g:message code="advancedsearch.table09col02.title" default="Record Number"/></td>
             <td>
-                <input type="text" name="record_number" id="record_number" class="dataset" placeholder="" value=""/>
+                <input type="text" name="record_number" id="record_number" class="dataset form-control" placeholder="" value=""/>
             </td>
         </tr>
         <%--<tr>
@@ -234,32 +234,32 @@
         </tbody>
     </table>
     <b><g:message code="advancedsearch.title10" default="Find records within the following date range"/></b>
-    <table border="0" width="100" cellspacing="2" class="compact">
+    <table border="0" width="100" cellspacing="2" class="compact form-inline">
         <thead/>
         <tbody>
         <tr>
             <td class="labels"><g:message code="advancedsearch.table10col01.title" default="Begin Date"/></td>
             <td>
-                <input type="text" name="start_date" id="startDate" class="occurrence_date" placeholder="" value=""/>
+                <input type="text" name="start_date" id="startDate" class="occurrence_date form-control" placeholder="" value=""/>
                 <g:message code="advancedsearch.table10col01.des" default="(YYYY-MM-DD) leave blank for earliest record date"/>
             </td>
         </tr>
         <tr>
             <td class="labels"><g:message code="advancedsearch.table10col02.title" default="End Date"/></td>
             <td>
-                <input type="text" name="end_date" id="endDate" class="occurrence_date" placeholder="" value=""/>
+                <input type="text" name="end_date" id="endDate" class="occurrence_date form-control" placeholder="" value=""/>
                 <g:message code="advancedsearch.table10col02.des" default="(YYYY-MM-DD) leave blank for most recent record date"/>
             </td>
         </tr>
         </tbody>
     </table>
-    <input type="submit" value=<g:message code="advancedsearch.button.submit" default="Search"/> class="btn btn-primary" />
+    <input type="submit" value="<g:message code="advancedsearch.button.submit" default="Search"/>" class="btn btn-primary" />
     &nbsp;&nbsp;
-    <input type="reset" value="Clear all" id="clearAll" class="btn" onclick="$('input#solrQuery').val(''); $('input.clear_taxon').click(); return true;"/>
+    <input type="reset" value="Clear all" id="clearAll" class="btn btn-default" onclick="$('input#solrQuery').val(''); $('input.clear_taxon').click(); return true;"/>
 </form>
 <r:script>
     $(document).ready(function() {
-        $('.bscombobox').combobox({bsVersion: '2'});
+        $('.bscombobox').combobox();
     });
 
 </r:script>
