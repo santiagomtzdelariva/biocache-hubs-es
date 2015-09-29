@@ -576,26 +576,28 @@ class OccurrenceTagLib {
                 }
                 tr(){
                     if (occurrence.eventDate) {
-                        outputResultsTd("${message(code:'occurrence.raw_date')}: ", g.formatDate(date: new Date(occurrence.eventDate), format:"dd-MMM-yyyy"), occurrence.stateProvince)
+                        outputResultsTd("${message(code:'occurrence.raw_date')}: ", g.formatDate(date: new Date(occurrence.eventDate), format:"dd-MMM-yyyy"), occurrence.eventDate)
                     }else if (occurrence.year){
                         outputResultsTd("Year: ", occurrence.year, true)
+                    }else{
+                        outputResultsTd("${message(code:'occurrence.raw_date')}:  ", "${occurrence.raw_date}&nbsp;&nbsp;${occurrence.raw_date?:''}", true)
                     }
                     outputResultsTd("Locality: ", occurrence.lga, occurrence.lga)
-
                 }
 
                 tr() {
-                    outputResultsTd("Institution: ", alatag.message(code:occurrence.institutionName), occurrence.institutionName)
-
+                    outputResultsTd("Basis&nbsp;of&nbsp;record: ", alatag.message(code:occurrence.basisOfRecord), occurrence.basisOfRecord)
+                    outputResultsTd("Latitude: ", alatag.message(code:occurrence.decimalLatitude), occurrence.decimalLatitude)
                 }
                 tr(){
+                    outputResultsTd("Data&nbsp;Resource: ", occurrence.dataResourceName, occurrence.dataResourceName)
+                    outputResultsTd("Longitude: ", alatag.message(code:occurrence.decimalLongitude), occurrence.decimalLongitude)
+                }
+                tr() {
                     outputResultsTd("Collection: ", alatag.message(code:occurrence.collectionName), occurrence.collectionName)
                 }
-                tr() {
-                    outputResultsTd("Data&nbsp;Resource: ", occurrence.dataResourceName, !occurrence.collectionName && occurrence.dataResourceName)
-                }
                 tr(){
-                    outputResultsTd("Basis&nbsp;of&nbsp;record: ", alatag.message(code:occurrence.basisOfRecord), occurrence.basisOfRecord)
+                    outputResultsTd("Institution: ", alatag.message(code:occurrence.institutionName), occurrence.institutionName)
                     td(colspan: '3', style: 'text-align: right;') {
                         a(
                                 href: g.createLink(url:"${request.contextPath}/occurrences/${occurrence.uuid}"),
