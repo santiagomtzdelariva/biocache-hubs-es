@@ -586,7 +586,7 @@ class OccurrenceTagLib {
                 }
 
                 tr() {
-                    outputResultsTd("Basis&nbsp;of&nbsp;record: ", alatag.message(code:occurrence.basisOfRecord), occurrence.basisOfRecord)
+                    outputResultsTd("Basis&nbsp;of&nbsp;record: ", "${occurrence.basisOfRecord}&nbsp;&nbsp;${occurrence.basisOfRecord?:''}", true)
                     outputResultsTd("Latitude: ", alatag.message(code:occurrence.decimalLatitude), occurrence.decimalLatitude)
                 }
                 tr(){
