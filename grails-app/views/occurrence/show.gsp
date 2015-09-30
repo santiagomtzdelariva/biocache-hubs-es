@@ -46,7 +46,8 @@
                 <g:each var="sds" in="${sensitiveDatasets}"
                    status="s">'${sds}': '${grailsApplication.config.sensitiveDatasets[sds]}'${s < (sensitiveDatasets.size() - 1) ? ',' : ''}
                 </g:each>
-            }
+            },
+            defaultListView: "${grailsApplication.config.defaultListView}"
         }
 
         // Google charts
@@ -192,13 +193,14 @@
                 <div class="tabbable span8">
                     <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="active"><a id="t1" href="#content2Z" data-toggle="tab"><g:message code="recordcore.oc.title" default="Records"/></a></li>
+                        <li><a id="t2" href="#dataQuality" data-toggle="tab"><g:message code="show.dataquality.title" default="Map"/></a></li>
                         <g:if test="${contextualSampleInfo}">
-                            <li><a id="t2" href="#outlierInformation" data-toggle="tab"><g:message code="show.outlierinformation.02.title01" default="Map"/></a></li>
+                            <li><a id="t3" href="#outlierInformation" data-toggle="tab"><g:message code="show.outlierinformation.02.title01" default="Map"/></a></li>
                         </g:if>
                         <g:if test="${environmentalSampleInfo}">
-                            <li><a id="t3" href="#environmentalSampleInfo" data-toggle="tab"><g:message code="show.outlierinformation.02.title02" default="Map"/></a></li>
+                            <li><a id="t4" href="#environmentalSampleInfo" data-toggle="tab"><g:message code="show.outlierinformation.02.title02" default="Map"/></a></li>
                         </g:if>
-                        <li><a id="t4" href="#dataQuality" data-toggle="tab"><g:message code="show.dataquality.title" default="Map"/></a></li>
+
                     </ul>
                 <div class="tab-content clearfix" style="margin-top: -20px;margin-bottom: 10px;">
 
