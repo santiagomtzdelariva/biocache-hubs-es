@@ -30,7 +30,7 @@ auth.admin_role = "ROLE_ADMIN"
 serverName = 'http://dev.ala.org.au:8080'
 
 // skin settings
-organisation.baseUrl = "http://www.ala.org.au"
+organisation.baseUrl = "http://datos.gbif.es"
 skin.layout = "generic"
 skin.fluidLayout = "true"
 skin.orgNameLong = "Generic Portal"
@@ -46,15 +46,15 @@ skin.taxaLinks.identifier = "guid"  // "guid" or "name". Only used if skin.useAl
 bie.baseUrl = "http://bie.ala.org.au"
 bieService.baseUrl = "http://bie.ala.org.au/ws"
 //bie.autocompleteHints.fq = "kingdom:Plantae"  // optional
-collectory.baseUrl = "http://collections.ala.org.au"
+collectory.baseUrl = "http://datos.gbif.es/collectory"
 //logger.baseUrl = "http://logger.ala.org.au/service"
 biocache.apiKey = "api-key-to-use"
-biocache.baseUrl = "http://biocache.ala.org.au/ws"
+biocache.baseUrl = "http://datos.gbif.es/biocache-service"
 biocache.queryContext = "" // datahub uuid - e.g. ozcam  = " data_hub_uid:dh1 || avh = data_hub_uid:dh2"
 biocache.downloads.extra = "dataResourceUid,dataResourceName.p"
 biocache.ajax.useProxy = false
 //biocache.groupedFacetsUrl = "${biocache.baseUrl}/search/grouped/facets" // optional - define in hub only
-collections.baseUrl = "http://collections.ala.org.au"
+collections.baseUrl = "http://datos.gbif.es/collectory"
 
 // images
 images.baseUrl = "http://images.ala.org.au"
