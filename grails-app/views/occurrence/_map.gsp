@@ -259,6 +259,8 @@ a.colour-by-legend-toggle {
 	var mbUrl = 'https://{s}.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={token}';
     var defaultBaseLayer = L.tileLayer(mbUrl, {mapid: '${grailsApplication.config.map.mapbox.id}', token: '${grailsApplication.config.map.mapbox.token}', attribution: mbAttr});
 
+
+
     var MAP_VAR = {
         map : null,
         mappingUrl : "${mappingUrl}",
@@ -271,13 +273,14 @@ a.colour-by-legend-toggle {
         overlays : {
 
             <g:if test="${grailsApplication.config.map.overlay.url}">
-                //example WMS layer
-                "${grailsApplication.config.map.overlay.name?:'overlay'}" : L.tileLayer.wms("${grailsApplication.config.map.overlay.url}", {
-                    layers: 'ALA:ucstodas',
-                    format: 'image/png',
-                    transparent: true,
-                    attribution: "${grailsApplication.config.map.overlay.name?:'overlay'}"
-                })
+
+                "${grailsApplication.config.map.overlay.name?:'overlay'}" : L.tileLayer.wms("${grailsApplication.config.map.overlay.url}",{
+                          layers: "${grailsApplication.config.map.overlay.layer}",
+                          format: 'image/png',
+                          transparent: true,
+                          version: '1.3.0',
+                          attribution: "${grailsApplication.config.map.overlay.name?:'overlay'}"
+                       })
             </g:if>
 
         },
